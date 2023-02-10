@@ -1,58 +1,67 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-function genUpper() {
-  //ASCII capital letter range [65-90]
-  //Generate capital letters
-  return String.fromCharCode(Math.floor(Math.random() * (91 - 65) ) + 65);
-}
+//ASCII capital letter range [65-90]
+function addUppers() {
+  var temp = "";
+  for (var i = 65; i < 91; i++) {
+    temp = temp.concat(String.fromCharCode(i));
+  }
+  console.log(temp);
+  return temp;
+};
 
-function genLowercase() {
-  //ASCII lowercase letter range [97-122]
-  //Generate lowercase letters
-  return String.fromCharCode(Math.floor(Math.random() * (123 - 97) ) + 97);
-}
+//ASCII lowercase letter range [97-122]
+function addLowers() {
+  var temp = "";
+  for (var i = 97; i < 123; i++) {
+    temp = temp.concat(String.fromCharCode(i));
+  }
+  return temp;
+};
 
-function genSpecialChar() {
-  //Special characters string " !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~" ASCII range [32-47]U[58-64]U[91-96] possibly not
-  //But since that range is terrible, I'm going to use the string given in the source provided by the project outline
+//ASCII Numerics range [48-57]
+function addNumerics() {
+  var temp = "";
+  for (var i = 48; i < 58; i++) {
+    temp = temp.concat(String.fromCharCode(i));
+  }
+  return temp;
+};
+
+//Special characters string " !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~" ASCII range [32-47]U[58-64]U[91-96] possibly not
+//But since that range is terrible, I'm going to use the string given in the source provided by the project outline
+function addSpecials() {
   const specialChars = " !\"#$%&\'()*+,-./:;<=>?@[\\]^_\`{|}~"
-  //Generates special characters
-  return specialChars.charAt(Math.floor(Math.random() * (specialChars.length)));
-}
-
-function genNumericalChar() {
-  //ASCII Numerics range [48-57]
-  //Generate random numbers in string form
-  return String.fromCharCode(Math.floor(Math.random() * (58 - 48) ) + 48);
-}
+  return specialChars;
+};
 
 function generatePassword() {
   var password = "";
+  var charPool = "";
   var hasLower = true;
-  var hasUpper = false;
-  var hasNumbers = false;
-  var hasSpecialChars = false;
+  var hasUpper = true;
+  var hasNumbers = true;
+  var hasSpecialChars = true;
   var userLength = 8;
-    
-  for (var i = 0; i <=  userLength; i++) {
 
+  if (hasLower) {
+    charPool = charPool.concat(addLowers());
   }
-  while (password.length <= userLength) {
-    if (hasLower) {
-      password.concat(genLowercase());
-    }
-    if (hasUpper) {
-      password.concat(genUpper());
-    }
-    if (hasNumbers) {
-      password.concat(genNumericalChar());
-    }
-    if (hasSpecialChars) {
-      password.concat(genSpecialChar());
-    }
+  if (hasUpper) {
+    charPool = charPool.concat(addUppers());
+  }
+  if (hasNumbers) {
+    charPool = charPool.concat(addNumerics());
+  }
+  if (hasSpecialChars) {
+    charPool = charPool.concat(addSpecials());
   }
 
+  for (i = 0; i <= userLength; i++) {
+    password = password.concat(charPool.charAt(Math.floor(Math.random() * charPool.length)));
+  }
+  console.log(password);
   return password;
 }
 
