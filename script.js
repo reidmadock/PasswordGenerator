@@ -7,7 +7,6 @@ function addUppers() {
   for (var i = 65; i < 91; i++) {
     temp = temp.concat(String.fromCharCode(i));
   }
-  console.log(temp);
   return temp;
 };
 
@@ -42,7 +41,8 @@ function getPassLength() {
   while (!valid) {
     var checkLength = prompt("Please enter desired length between 8-128");
     passwordLength = parseInt(checkLength);
-    if (passwordLength < 8 || passwordLength > 128) {
+    console.log(passwordLength);
+    if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
       alert("Please enter valid number");
     } else {
       valid = true;
@@ -54,7 +54,7 @@ function getPassLength() {
 function generatePassword() {
   var password = "";
   var charPool = "";
-  var userLength = 8;
+  var userLength = 0;
   var checkLower = confirm("Would you like to add Lower Case?");
   var checkUpper = confirm("Would you like to add Upper Case?");
   var checkNumbers = confirm("Would you like to add numbers?");
