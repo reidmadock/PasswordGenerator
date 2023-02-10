@@ -36,32 +36,49 @@ function addSpecials() {
   return specialChars;
 };
 
+function getPassLength() {
+  var valid = false;
+  var passwordLength = 0;
+  while (!valid) {
+    var checkLength = prompt("Please enter desired length between 8-128");
+    passwordLength = parseInt(checkLength);
+    if (passwordLength < 8 || passwordLength > 128) {
+      alert("Please enter valid number");
+    } else {
+      valid = true;
+    }
+  }
+  return checkLength;
+}
+
 function generatePassword() {
   var password = "";
   var charPool = "";
-  var hasLower = true;
-  var hasUpper = true;
-  var hasNumbers = true;
-  var hasSpecialChars = true;
   var userLength = 8;
+  var checkLower = confirm("Would you like to add Lower Case?");
+  var checkUpper = confirm("Would you like to add Upper Case?");
+  var checkNumbers = confirm("Would you like to add numbers?");
+  var checkSpecial = confirm("Would you like to add Special Characters?");
 
-  if (hasLower) {
+  if (checkLower) {
     charPool = charPool.concat(addLowers());
   }
-  if (hasUpper) {
+  if (checkUpper) {
     charPool = charPool.concat(addUppers());
   }
-  if (hasNumbers) {
+  if (checkNumbers) {
     charPool = charPool.concat(addNumerics());
   }
-  if (hasSpecialChars) {
+  if (checkSpecial) {
     charPool = charPool.concat(addSpecials());
   }
 
-  for (i = 0; i <= userLength; i++) {
+  userLength = getPassLength();
+
+  for (i = 0; i < userLength; i++) {
     password = password.concat(charPool.charAt(Math.floor(Math.random() * charPool.length)));
+    console.log(i);
   }
-  console.log(password);
   return password;
 }
 
