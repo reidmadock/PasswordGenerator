@@ -47,21 +47,20 @@ function getPassLength() {
   var passwordLength = 0;
   //Password is false by default, while loop continues until a valid password meeting parameters is met.
   while (!valid) {
-    var checkLength = prompt("Please enter desired length between 8-128");
-    passwordLength = parseInt(checkLength);
+    passwordLength = parseInt(prompt("Please enter desired length between 8-128"));
     if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
       alert("Please enter valid number");
     } else {
       valid = true;
     }
   }
-  return checkLength;
+  return passwordLength;
 }
 
 function generatePassword() {
   var password = "";
   var charPool = "";
-  var userLength = 0;
+  var userLength = 0; //User defined password length
   var checkLower = confirm("Would you like to add Lower Case?");
   var checkUpper = confirm("Would you like to add Upper Case?");
   var checkNumbers = confirm("Would you like to add numbers?");
@@ -85,6 +84,7 @@ function generatePassword() {
   userLength = getPassLength();
 
   for (i = 0; i < userLength; i++) {
+    //add a random character from the pool onto the password up until the length defined by the user
     password = password.concat(charPool.charAt(Math.floor(Math.random() * charPool.length)));
   }
   return password;
@@ -96,7 +96,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
